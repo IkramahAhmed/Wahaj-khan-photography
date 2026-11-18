@@ -51,6 +51,23 @@
   lb.addEventListener('click', e => { if (e.target !== $('.lb-img', lb)) closeLb(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
+  // ---- hero video: loaded AFTER the page is interactive, size picked per device ----
+  const hv = $('.hero-video');
+  if (hv) {
+    const conn = navigator.connection || {};
+    const skip = matchMedia('(prefers-reduced-motion:reduce)').matches || conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
+    const startVideo = () => {
+      if (skip) return;
+      hv.src = (innerWidth <= 860 || conn.effectiveType === '3g') ? hv.dataset.srcSm : hv.dataset.srcHd;
+      hv.addEventListener('playing', () => hv.classList.add('on'), { once: true });
+      hv.play().catch(() => {});
+    };
+    const later = () => ('requestIdleCallback' in window ? requestIdleCallback(startVideo, { timeout: 2500 }) : setTimeout(startVideo, 1200));
+    document.readyState === 'complete' ? later() : addEventListener('load', later, { once: true });
+    // pause when the hero is off-screen or the tab is hidden: saves CPU/battery and keeps scrolling smooth
+    new IntersectionObserver(es => es.forEach(e => { if (!hv.src) return; e.isIntersecting ? hv.play().catch(() => {}) : hv.pause(); })).observe(hv);
+  }
+
   // ---- hero 3D ring ----
   const ring = $('#ring'), N = 8, R = 330;
   for (let i = 0; ring && i < N; i++) {
