@@ -1,0 +1,7 @@
+{
+  "name": "wahaj-khan-photo-tools",
+  "private": true,
+  "type": "module",
+  "scripts": { "optimize": "node optimize-photos.mjs" },
+  "dependencies": { "sharp": "^0.33.5" }
+}

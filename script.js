@@ -5,22 +5,22 @@
 
   // ---- placeholder photos (swap `src` with real image paths later) ----
   const works = [
-    { t: 'Pakistani Bridal, Lahore', c: 'bridal', r: '2/3', src: 'photos/bridal-15.jpg' },
-    { t: 'The Nikkah Hand', c: 'details', r: '3/2', src: 'photos/bridal-17.jpg' },
-    { t: 'Golden Hour Couple', c: 'couples', r: '3/2', src: 'photos/bridal-7.jpg' },
-    { t: 'Teal Bridal', c: 'bridal', r: '2/3', src: 'photos/bridal-1.jpg' },
-    { t: 'Henna in Progress', c: 'mehndi', r: '3/2', src: 'photos/bridal-5.jpg' },
-    { t: 'Maroon Bride', c: 'bridal', r: '2/3', src: 'photos/bridal-3.jpg' },
-    { t: 'Hand in Hand', c: 'details', r: '2/3', src: 'photos/bridal-2.jpg' },
-    { t: 'Red Lehenga Portrait', c: 'bridal', r: '2/3', src: 'photos/bridal-8.jpg' },
-    { t: 'Stage & Decor', c: 'decor', r: '16/9', src: 'photos/bridal-14.jpg' },
-    { t: 'Mehndi Details', c: 'mehndi', r: '3/2', src: 'photos/bridal-6.jpg' },
+    { t: 'Pakistani Bridal, Lahore', c: 'bridal', r: '2/3', src: 'photos/bridal-15.webp', th: 'photos/thumbs/bridal-15.webp' },
+    { t: 'The Nikkah Hand', c: 'details', r: '3/2', src: 'photos/bridal-17.webp', th: 'photos/thumbs/bridal-17.webp' },
+    { t: 'Golden Hour Couple', c: 'couples', r: '3/2', src: 'photos/bridal-7.webp', th: 'photos/thumbs/bridal-7.webp' },
+    { t: 'Teal Bridal', c: 'bridal', r: '2/3', src: 'photos/bridal-1.webp', th: 'photos/thumbs/bridal-1.webp' },
+    { t: 'Henna in Progress', c: 'mehndi', r: '3/2', src: 'photos/bridal-5.webp', th: 'photos/thumbs/bridal-5.webp' },
+    { t: 'Maroon Bride', c: 'bridal', r: '2/3', src: 'photos/bridal-3.webp', th: 'photos/thumbs/bridal-3.webp' },
+    { t: 'Hand in Hand', c: 'details', r: '2/3', src: 'photos/bridal-2.webp', th: 'photos/thumbs/bridal-2.webp' },
+    { t: 'Red Lehenga Portrait', c: 'bridal', r: '2/3', src: 'photos/bridal-8.webp', th: 'photos/thumbs/bridal-8.webp' },
+    { t: 'Stage & Decor', c: 'decor', r: '16/9', src: 'photos/bridal-14.webp', th: 'photos/thumbs/bridal-14.webp' },
+    { t: 'Mehndi Details', c: 'mehndi', r: '3/2', src: 'photos/bridal-6.webp', th: 'photos/thumbs/bridal-6.webp' },
   ];
   const grid = $('#grid');
   works.forEach(w => {
     const d = document.createElement('div');
     d.className = 'item reveal'; d.dataset.c = w.c; d.dataset.cap = w.t;
-    d.innerHTML = `<div class="ph" style="--r:${w.r}" data-bg="${w.src}" role="img" aria-label="${w.t}"></div>`;
+    d.innerHTML = `<div class="ph" style="--r:${w.r}" data-bg="${w.th}" role="img" aria-label="${w.t}"></div>`;
     d.addEventListener('click', () => openLb(w));
     grid.appendChild(d);
   });
