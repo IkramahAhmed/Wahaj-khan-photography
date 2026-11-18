@@ -20,10 +20,17 @@
   works.forEach(w => {
     const d = document.createElement('div');
     d.className = 'item reveal'; d.dataset.c = w.c; d.dataset.cap = w.t;
-    d.innerHTML = `<div class="ph" style="--r:${w.r};background-image:url(${w.src})" role="img" aria-label="${w.t}"></div>`;
+    d.innerHTML = `<div class="ph" style="--r:${w.r}" data-bg="${w.src}" role="img" aria-label="${w.t}"></div>`;
     d.addEventListener('click', () => openLb(w));
     grid.appendChild(d);
   });
+
+  // lazy-load grid photos shortly before they scroll into view
+  const lazy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target; el.style.backgroundImage = `url(${el.dataset.bg})`; lazy.unobserve(el);
+  }), { rootMargin: '600px 0px' });
+  $$('.ph[data-bg]', grid).forEach(el => lazy.observe(el));
 
   // filters
   $$('.chip').forEach(b => b.addEventListener('click', () => {
